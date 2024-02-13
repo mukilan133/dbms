@@ -1,0 +1,96 @@
+C:\Users>cd..
+C:\>cd xampp
+C:\xampp>cd mysql
+C:\xampp\mysql>cd bin
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.28-MariaDB mariadb.org binary distribution
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+MariaDB [(none)]> use cs80
+Database changed
+MariaDB [cs80]> create table product(productID int(10),productcode char(7),name varchar(10),quantity int(10),price decimal(12,7),primary key(productID));
+Query OK, 0 rows affected (0.48 sec)
+MariaDB [cs80]> insert into product values(1001,'pen','ravi',5000,1.23);
+Query OK, 1 row affected (0.10 sec)
+MariaDB [cs80]> insert into product values(1002,'pencil','banu',8000,1.53);
+Query OK, 1 row affected (0.15 sec)
+MariaDB [cs80]> insert into product values(1003,'penred','anu',4000,1.73); 	
+Query OK, 1 row affected (1.72 sec)                                                                                      
+MariaDB [cs80]> insert into product values(1004,'pen','priya',2000,1.33);               
+Query OK, 1 row affected (1.83 sec)
+MariaDB [cs80]> insert into product values(1005,'pencil','krea',7000,1.36);
+Query OK, 1 row affected (0.16 sec)
+MariaDB [cs80]> select *from product;
++--------------+------------------+----------+------------+--------------------+
+| productID| productcode | name  | quantity |       price           |
++--------------+------------------+----------+------------+--------------------+
+|      1001     | pen                 | ravi      |     5000   |   1.2300000    |
+|      1002     | pencil             | banu    |     8000   |   1.5300000    |
+|      1003     | penred           | anu      |     4000   |   1.7300000    |
+|      1004     | pen                 | priya    |     2000   |   1.3300000    |
+|      1005     | pencil             | krea     |     7000   |   1.3600000     |
++--------------+------------------+----------+-------------+-------------------+
+5 rows in set (0.00 sec)
+MariaDB [cs80]> create table student(snum int,sname varchar(10),major varchar(10),level varchar(3),age int,primary key(snum));
+Query OK, 0 rows affected (0.23 sec)
+MariaDB [cs80]> insert into student values(101,'meena','csc','jr',19);
+Query OK, 1 row affected (1.82 sec)
+MariaDB [cs80]> insert into student values(102,'maya','com','sr',18);
+Query OK, 1 row affected (0.08 sec) 							
+MariaDB [cs80]> insert into student values(103,'pavi','math','jr',25);
+Query OK, 1 row affected (0.43 sec)                                                                                                                                                                                     MariaDB [test]> insert into student values(104,'raj','bba','sr',23);                            
+
+MariaDB [cs80]> insert into student values(105,'renu','csc','jr',27);
+Query OK, 1 row affected (1.82 sec)
+MariaDB [cs80]> select *from student;
++--------+---------- +---------+--------+------+
+| snum | sname  | major | level | age  |
++--------+---------- +---------+--------+------+
+|  101   | meena | csc       | jr       |   19 |
+|  102   | maya    | com    | sr       |   18 |
+|  103   | pavi       | math  | jr       |   25 |
+|  104   | raj         | bba     | sr       |   23 |
+|  105   | renu      | csc      | jr       |   27 |
++--------+-----------+---------+--------+------+
+5 rows in set (0.00 sec)
+MariaDB [cs80]> select name,price from product where name like'anu%';
++--------+---------------+
+| name | price          |
++--------+---------------+
+| anu    | 1.7300000 |
++--------+---------------+ 									
+1 row in set (0.39 sec)
+MariaDB [cs80]> select *from student order by age desc;
++--------+-----------+---------+--------+------+                                                                               
+| snum | sname  | major | level | age  |                                                                                                  +--------+-----------+---------+--------+------+
+|  105    | renu     | csc      | jr       |   27 |
+|  103    | pavi      | math  | jr       |   25 |
+|  104    | raj         | bba    | sr       |   23 |
+|  101   | meena | csc       | jr       |   19 |
+|  102   | maya    | com    | sr       |   18 |
++--------+-----------+---------+--------+------+
+5 rows in set (0.00 sec)
+MariaDB [cs80]> select *from student order by major asc;
++--------+-----------+--------- +--------+------+
+| snum | sname  | major | level | age  |
++--------+-----------+----------+--------+------+
+|  104   | raj          | bba      | sr      |   23 |
+|  102   | maya     | com     | sr      |   18 |
+|  101   | meena  | csc        | jr       |   19 |
+|  105   | renu      | csc        | jr      |   27 |
+|  103   | pavi       | math    | jr      |   25 |
++--------+-----------+----------+--------+------+
+5 rows in set (0.00 sec)								 
+MariaDB [cs80]> select name price from product where name like'ravi';
++-------+
+| price |
++-------+                                                                                                                                         
+| ravi   |                                                                                                                                                                   +-------+
+1 row in set (0.00 sec)
+
+
+
+
+

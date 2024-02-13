@@ -1,0 +1,206 @@
+
+
+C:\Users\hp>cd..
+
+C:\Users>cd..
+
+C:\>cd xampp
+
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use cs80
+Database changed
+
+MariaDB [cs80]> create table student(name varchar(10),rollno int(5),dept varchar(9),sub varchar(9),marks int(5),age int(5),primary key(name));
+Query OK, 0 rows affected (0.138 sec)
+
+
+
+MariaDB [cs80]> insert into student values("kanna",100,"cs","computer",95,20);
+Query OK, 1 row affected (0.044 sec)
+
+MariaDB [cs80]> insert into student values("karthi",101,"bba","bussiness",80,19);
+Query OK, 1 row affected (0.030 sec)
+
+MariaDB [cs80]> insert into student values("bala",102,"maths","algebra",75,21);
+Query OK, 1 row affected (0.034 sec)
+
+MariaDB [cs80]> insert into student values("kavitha",103,"physics","ap",94,23);
+Query OK, 1 row affected (0.040 sec)
+
+MariaDB [cs80]> insert into student values("ramu",104,"bcom","commerce",67,18);
+Query OK, 1 row affected (0.031 sec)
+
+MariaDB [cs80]> insert into student values("chithra",105,"chemistry","tamil",90,22);
+Query OK, 1 row affected (0.031 sec)
+
+MariaDB [cs80]> insert into student values("priya",106,"english","poem",83,17);
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [cs80]> select * from student;
++---------+--------+-----------+-----------+-------+------+
+| name    | rollno | dept      | sub       | marks | age  |
++---------+--------+-----------+-----------+-------+------+
+| bala    |    102 | maths     | algebra   |    75 |   21 |
+| chithra |    105 | chemistry | tamil     |    90 |   22 |
+| kanna   |    100 | cs        | computer  |    95 |   20 |
+| karthi  |    101 | bba       | bussiness |    80 |   19 |
+| kavitha |    103 | physics   | ap        |    94 |   23 |
+| priya   |    106 | english   | poem      |    83 |   17 |
+| ramu    |    104 | bcom      | commerce  |    67 |   18 |
++---------+--------+-----------+-----------+-------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [cs80]> select name,rollno,sub from student;
++---------+--------+-----------+
+| name    | rollno | sub       |
++---------+--------+-----------+
+| bala    |    102 | algebra   |
+| chithra |    105 | tamil     |
+| kanna   |    100 | computer  |
+| karthi  |    101 | bussiness |
+| kavitha |    103 | ap        |
+| priya   |    106 | poem      |
+| ramu    |    104 | commerce  |
++---------+--------+-----------+
+7 rows in set (0.000 sec)
+
+MariaDB [cs80]> select name,rollno,dept,marks from student where marks>=90;
++---------+--------+-----------+
+| name    | rollno | dept      | 
++---------+--------+-----------+
+| chithra |    105 | chemistry |
+| kanna   |    100 | cs        |
+| kavitha |    103 | physics   |
++---------+--------+-----------+
+3 rows in set (0.032 sec)
+
+MariaDB [cs80]> select name,rollno from student where age<18;
++-------+--------+
+| name  | rollno |
++-------+--------+
+| priya |    106 |
++-------+--------+
+1 row in set (0.016 sec)
+
+MariaDB [cs80]> insert into student values("veni",107,"economics","poetry",79,27);
+Query OK, 1 row affected (0.036 sec)
+
+MariaDB [cs80]> select * from student;
++---------+--------+-----------+-----------+-------+------+
+| name    | rollno | dept      | sub       | marks | age  |
++---------+--------+-----------+-----------+-------+------+
+| bala    |    102 | maths     | algebra   |    75 |   21 |
+| chithra |    105 | chemistry | tamil     |    90 |   22 |
+| kanna   |    100 | cs        | computer  |    95 |   20 |
+| karthi  |    101 | bba       | bussiness |    80 |   19 |
+| kavitha |    103 | physics   | ap        |    94 |   23 |
+| priya   |    106 | english   | poem      |    83 |   17 |
+| ramu    |    104 | bcom      | commerce  |    67 |   18 |
+| veni    |    107 | economics | poetry    |    79 |   27 |
++---------+--------+-----------+-----------+-------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [cs80]> update student set marks=marks+5;
+Query OK, 8 rows affected (0.046 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+MariaDB [cs80]> select * from student;
++---------+--------+-----------+-----------+-------+------+
+| name    | rollno | dept      | sub       | marks | age  |
++---------+--------+-----------+-----------+-------+------+
+| bala    |    102 | maths     | algebra   |    80 |   21 |
+| chithra |    105 | chemistry | tamil     |    95 |   22 |
+| kanna   |    100 | cs        | computer  |   100 |   20 |
+| karthi  |    101 | bba       | bussiness |    85 |   19 |
+| kavitha |    103 | physics   | ap        |    99 |   23 |
+| priya   |    106 | english   | poem      |    88 |   17 |
+| ramu    |    104 | bcom      | commerce  |    72 |   18 |
+| veni    |    107 | economics | poetry    |    84 |   27 |
++---------+--------+-----------+-----------+-------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [cs80]> select rollno as registerno,name,age from student;
++------------+---------+------+
+| registerno | name    | age  |
++------------+---------+------+
+|        102 | bala    |   21 |
+|        105 | chithra |   22 |
+|        100 | kanna   |   20 |
+|        101 | karthi  |   19 |
+|        103 | kavitha |   23 |
+|        106 | priya   |   17 |
+|        104 | ramu    |   18 |
+|        107 | veni    |   27 |
++------------+---------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [cs80]> update student set rollno=rollno+10;
+Query OK, 8 rows affected (0.043 sec)
+Rows matched: 8  Changed: 8  Warnings: 0
+
+MariaDB [cs80]> select * from student;
++---------+--------+-----------+-----------+-------+------+
+| name    | rollno | dept      | sub       | marks | age  |
++---------+--------+-----------+-----------+-------+------+
+| bala    |    112 | maths     | algebra   |    80 |   21 |
+| chithra |    115 | chemistry | tamil     |    95 |   22 |
+| kanna   |    110 | cs        | computer  |   100 |   20 |
+| karthi  |    111 | bba       | bussiness |    85 |   19 |
+| kavitha |    113 | physics   | ap        |    99 |   23 |
+| priya   |    116 | english   | poem      |    88 |   17 |
+| ramu    |    114 | bcom      | commerce  |    72 |   18 |
+| veni    |    117 | economics | poetry    |    84 |   27 |
++---------+--------+-----------+-----------+-------+------+
+8 rows in set (0.000 sec)
+
+MariaDB [cs80]> delete from student where age<=19;
+Query OK, 3 rows affected (0.070 sec)
+
+MariaDB [cs80]> select * from student;
++---------+--------+-----------+----------+-------+------+
+| name    | rollno | dept      | sub      | marks | age  |
++---------+--------+-----------+----------+-------+------+
+| bala    |    112 | maths     | algebra  |    80 |   21 |
+| chithra |    115 | chemistry | tamil    |    95 |   22 |
+| kanna   |    110 | cs        | computer |   100 |   20 |
+| kavitha |    113 | physics   | ap       |    99 |   23 |
+| veni    |    117 | economics | poetry   |    84 |   27 |
++---------+--------+-----------+----------+-------+------+
+5 rows in set (0.000 sec)
+
+MariaDB [cs80]> alter table  student   add address int(5);
+Query OK, 0 rows affected (0.090 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [cs80]> 
++---------+--------+-----------+----------+-------+------+---------+
+| name    | rollno | dept      | sub      | marks | age  | address |
++---------+--------+-----------+----------+-------+------+---------+
+| bala    |    112 | maths     | algebra  |    80 |   21 |    NULL |
+| chithra |    115 | chemistry | tamil    |    95 |   22 |    NULL |
+| kanna   |    110 | cs        | computer |   100 |   20 |    NULL |
+| kavitha |    113 | physics   | ap       |    99 |   23 |    NULL |
+| veni    |    117 | economics | poetry   |    84 |   27 |    NULL |
++---------+--------+-----------+----------+-------+------+---------+
+5 rows in set (0.000 sec)
+
+
+MariaDB [cs80]> drop table student;
+Query OK, 0 rows affected (0.100 sec)
+
+MariaDB [cs80]> select * from student;
+ERROR 1146 (42S02): Table 'cs80.student' doesn't exist

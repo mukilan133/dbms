@@ -1,0 +1,159 @@
+C:\Users>cd..
+C:\>cd xampp
+C:\xampp>cd mysql
+C:\xampp\mysql>cd bin
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.28-MariaDB mariadb.org binary distribution
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+MariaDB [(none)]> use cs80
+Database changed
+program
+MariaDB [cs80]> create table employee(ename varchar(10),eno int(10),age int(10),qualification varchar(10),primary key(eno));
+Query OK, 0 rows affected (0.52 sec)
+MariaDB [cs80]> insert into employee values('raj',125,27,'bca');
+Query OK, 1 row affected (0.20 sec)
+MariaDB [cs80]> insert into employee values('raja',130,25,'msc');
+Query OK, 1 row affected (0.16 sec) 							
+MariaDB [cs80]> insert into employee values('keerthi',122,39,'btech');
+Query OK, 1 row affected (0.08 sec)                                                                                        
+MariaDB[cs80]> insert into employee values('siva',120,22,'bsc');
+Query OK, 1 row affected (0.07 sec)
+MariaDB [cs80]> insert into employee values('shalini',110,29,'bcom');
+Query OK, 1 row affected (0.42 sec)
+MariaDB [cs80]> insert into employee values('saranya',135,24,'mtech');
+Query OK, 1 row affected (1.82 sec)
+MariaDB [cs80]> insert into employee values('sakthi',140,40,'mca');
+Query OK, 1 row affected (0.09 sec)
+MariaDB [cs80]> select *from employee;
++-----------+-------+------+------------------+
+| ename   | eno | age  | qualification |
++-----------+-------+------+------------------+
+| shalini    | 110  |   29 | bcom             |
+| siva         | 120  |   22 | bsc                 |
+| keerthi   | 122  |   39 | btech            |
+| raj           | 125  |   27 | bca                |
+| raja         | 130  |   25 | msc               |
+| saranya  | 135  |   24 | mtech           |
+| sakthi     | 140  |   40 | mca               |
++-----------+-------+------+------------------+
+7 rows in set (0.00 sec)								 
+MariaDB [cs80]> create table salary(eno int(10),basic int(70),da int(18),hra int(18),bonus int(10),primary key(basic));
+Query OK, 0 rows affected (1.93 sec)                                                                                      
+MariaDB [cs80]> insert into salary values(122,6000,2000,2300,200);
+Query OK, 1 row affected (0.08 sec)
+MariaDB [test]> insert into salary values(125,2000,300,300,300);
+Query OK, 1 row affected (0.10 sec)
+MariaDB [cs80]> insert into salary values(130,1000,300,300,200);
+Query OK, 1 row affected (0.42 sec)
+MariaDB [cs80]> insert into salary values(135,1500,390,490,250);
+Query OK, 1 row affected (1.80 sec)
+MariaDB cs80]> insert into salary values(140,8000,900,900,100);
+Query OK, 1 row affected (0.14 sec)
+MariaDB [cs80]> insert into salary values(110,10000,200,490,120);
+Query OK, 1 row affected (0.08 sec)
+MariaDB [cs80]> insert into salary values(120,2500,2000,500,150);
+Query OK, 1 row affected (0.08 sec)
+MariaDB [cs80]> select *from salary;
++------+---------+-------+--------+----------+
+| eno  | basic  | da    | hra    | bonus |
++------+---------+-------+--------+----------+
+|  130 |  1000 |  300 |  300  |   200    |
+|  135 |  1500 |  390 |  490  |   250    | 						
+|  125 |  2000 |  300 |  300  |   300    |
+|  120 |  2500 | 2000|  500  |   150    |
+|  122 |  6000 | 2000| 2300 |   200    |
+|  140 |  8000 |  900 |  900  |   100    |                                                                                 
+|  110 | 10000|  200 |  490  |   120    |
++------+---------+-------+--------+----------+
+7 rows in set (0.00 sec)
+MariaDB [cs80]> select eno,ename from employee;
++------+-------------+
+| eno | ename     |
++------+-------------+
+| 110 | shalini     |
+| 120 | siva          |
+| 122 | keerthi    |
+| 125 | raj            |
+| 130 | raja          |
+| 135 | saranya   |
+| 140 | sakthi      |
++------+-------------+
+7 rows in set (0.00 sec)
+
+MariaDB [cs80]> select eno,bonus from salary;
++------+----------+ 									
+| eno  | bonus |
++------+----------+
+|  130 |   200    |
+|  135 |   250    |
+|  125 |   300    |                                                                                                                          
+|  120 |   150    |
+|  122 |   200    |
+|  140 |   100    |
+|  110 |   120    |
++------+-----------+
+7 rows in set (0.00 sec)
+MariaDB [cs80]> select max(age),min(age) from employee;
++-------------+-------------+
+| max(age) | min(age) |
++-------------+-------------+
+|       40        |       22      |
++-------------+-------------+
+1 row in set (0.00 sec)
+MariaDB [cs80]> select sum(basic),avg(da) from salary;
++---------------+-------------+
+| sum(basic) | avg(da)   |
++---------------+-------------+
+|      31000    | 870.0000 | 								
++---------------+-------------+
+1 row in set (0.00 sec)
+MariaDB [cs80]> update salary set bonus=bonus+200;
+Query OK, 7 rows affected (0.46 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+MariaDB [cs80]> select *from salary;                                                                                     
++------+----------+-------+-------+---------+
+| eno  | basic  | da     | hra  | bonus |
++------+----------+-------+-------+---------+
+|  130 |  1000  |  300  |  300 |   400  |
+|  135 |  1500  |  390  |  490 |   450  |
+|  125 |  2000  |  300  |  300 |   500  |
+|  120 |  2500  | 2000 |  500 |   350  |
+|  122 |  6000  | 2000 | 2300 |   400 |
+|  140 |  8000  |  900  |  900  |   300 |
+|  110 | 10000 |  200  |  490  |   320 |
++------+----------+--------+-------+--------+
+7 rows in set (0.00 sec)
+MariaDB [cs80]> delete from employee where age>=30;
+Query OK, 2 rows affected (0.08 sec)
+MariaDB [cs80]> select avg(basic) from salary where basic>=5000;
++----------------+
+| avg(basic)   |										 
++----------------+
+|  8000.0000 |
++----------------+
+1 row in set (0.00 sec)
+MariaDB [cs80]> select ename,qualification from employee;
++-----------+------------------+                                                                                                    
+| ename   | qualification|                                                                                                                                +-----------+------------------+
+| shalini    | bcom             |
+| siva         | bsc                 |
+| raj           | bca                 |
+| raja         | msc                |
+| saranya | mtech            |
++-----------+------------------+
+5 rows in set (0.00 sec)
+MariaDB [cs80]> delete from employee where ename like 'raj';
+Query OK, 1 row affected (0.07 sec)
+MariaDB [cs80]> select *from employee;
++-----------+------+-------+------------------+
+| ename  | eno | age  | qualification |
++---------   +------+-------+------------------+
+| shalini   | 110  |   29  | bcom             |
+| siva        | 120  |   22  | bsc                 | 						
+| raja        | 130  |   25  | msc                |
+| saranya | 135  |   24  | mtech            |
++-----------+-------+-------+------------------+
+4 rows in set (0.00 sec)

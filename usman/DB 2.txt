@@ -1,0 +1,167 @@
+
+
+
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.22-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use cs80
+Database changed
+
+MariaDB [cs80]> create table entrance(productID int(10),productname varchar(10),quantity int(10),price int(10),primary key(productID));
+Query OK, 0 rows affected (0.185 sec)
+
+MariaDB [cs80]>  insert into entrance values(1,'ball',200,10);
+Query OK, 1 row affected (0.041 sec)
+
+MariaDB [cs80]> insert into entrance values(2,'pen',200,15);
+Query OK, 1 row affected (0.043 sec)
+
+MariaDB [cs80]> insert into entrance values(3,'books',300,65);
+Query OK, 1 row affected (0.044 sec)
+
+MariaDB [cs80]>  insert into entrance values(4,'notes',500,55);
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [cs80]> insert into entrance values(5,'guides',400,50);
+Query OK, 1 row affected (0.042 sec)
+
+MariaDB [cs80]> create table excide(productID int(10),productname varchar(10),quantity int(10),price int(10),primary key(productID,productname));
+Query OK, 0 rows affected (0.311 sec)
+
+MariaDB [cs80]> insert into excide values(6,'scale',1,200);
+Query OK, 1 row affected (0.054 sec)
+MariaDB [cs80]> insert into excide values(7,'eraser',1,10);
+Query OK, 1 row affected (0.029 sec)
+
+MariaDB [cs80]>  insert into excide values(8,'purse',1,30);
+Query OK, 1 row affected (0.026 sec)
+
+MariaDB [cs80]> insert into excide values(9,'pencil',1,80);
+Query OK, 1 row affected (0.019 sec)
+
+MariaDB [cs80]> insert into excide values(10,'jug',1,60);
+Query OK, 1 row affected (0.052 sec)
+
+MariaDB [cs80]>  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         6 | scale       |        1 |   200 |
+|         7 | eraser      |        1 |    10 |
+|         8 | purse       |        1 |    30 |
+|         9 | pencil      |        1 |    80 |
+|        10 | jug         |        1 |    60 |
++-----------+-------------+----------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [cs80]> select*from entrance;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
+|         2 | pen         |      200 |    15 |
+|         3 | books       |      300 |    65 |
+|         4 | notes       |      500 |    55 |
+|         5 | guides      |      400 |    50 |
++-----------+-------------+----------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [cs80]> select*from entrance
+    -> union
+    ->  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
+|         2 | pen         |      200 |    15 |
+|         3 | books       |      300 |    65 |
+|         4 | notes       |      500 |    55 |
+|         5 | guides      |      400 |    50 |
+|         6 | scale       |        1 |   200 |
+|         7 | eraser      |        1 |    10 |
+|         8 | purse       |        1 |    30 |
+|         9 | pencil      |        1 |    80 |
+|        10 | jug         |        1 |    60 |
++-----------+-------------+----------+-------+
+10 rows in set (0.001 sec)
+
+MariaDB [cs80]> select*from entrance
+    -> union all
+    ->  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
+|         2 | pen         |      200 |    15 |
+|         3 | books       |      300 |    65 |
+|         4 | notes       |      500 |    55 |
+|         5 | guides      |      400 |    50 |
+|         6 | scale       |        1 |   200 |
+|         7 | eraser      |        1 |    10 |
+|         8 | purse       |        1 |    30 |
+|         9 | pencil      |        1 |    80 |
+|        10 | jug         |        1 |    60 |
++-----------+-------------+----------+-------+
+10 rows in set (0.000 sec)
+
+MariaDB [cs80]> delete from  excide  where price=10;
+Query OK, 1 row affected (0.083 sec)
+
+MariaDB [cs80]> insert into excide values(1,'ball',200,10);
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [cs80]> select*from entrance
+    -> union
+    ->  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
+|         2 | pen         |      200 |    15 |
+|         3 | books       |      300 |    65 |
+|         4 | notes       |      500 |    55 |
+|         5 | guides      |      400 |    50 |
+|         6 | scale       |        1 |   200 |
+|         8 | purse       |        1 |    30 |
+|         9 | pencil      |        1 |    80 |
+|        10 | jug         |        1 |    60 |
++-----------+-------------+----------+-------+
+9 rows in set (0.000 sec)
+
+    
+MariaDB [cs80]> select*from entrance
+    -> UNION ALL
+    ->  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
+|         2 | pen         |      200 |    15 |
+|         3 | books       |      300 |    65 |
+|         4 | notes       |      500 |    55 |
+|         5 | guides      |      400 |    50 |
+|         1 | ball        |      200 |    10 |
+|         6 | scale       |        1 |   200 |
+|         8 | purse       |        1 |    30 |
+|         9 | pencil      |        1 |    80 |
+|        10 | jug         |        1 |    60 |
++-----------+-------------+----------+-------+
+10 rows in set (0.000 sec)
+
+
+    
+MariaDB [cs80]> select*from entrance
+    -> INTERSECT
+    ->  select*from excide;
++-----------+-------------+----------+-------+
+| productID | productname | quantity | price |
++-----------+-------------+----------+-------+
+|         1 | ball        |      200 |    10 |
++-----------+-------------+----------+-------+
+1 row in set (0.001 sec)

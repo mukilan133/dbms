@@ -1,0 +1,137 @@
+C:\Users>cd..
+C:\>cd xampp
+C:\xampp>cd mysql
+C:\xampp\mysql>cd bin
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.28-MariaDB mariadb.org binary distribution
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+MariaDB [none]> use cs80
+Database changed
+MariaDB [cs80]> create table view(id int,name varchar(10),age int,marks int,primary key(id));
+Query OK, 0 rows affected (0.20 sec)
+MariaDB [cs80]> insert into view values(101,'kalai',34,100);
+Query OK, 1 row affected (0.14 sec)
+MariaDB [cs80]> insert into view values(102,'malai',24,50);
+Query OK, 1 row affected (0.09 sec)
+MariaDB [cs80]> insert into view values(103,'guna',26,25);
+Query OK, 1 row affected (0.08 sec)                                                                                       
+MariaDB [cs80]> insert into view values(104,'raja',30,70);                                                                    
+ Query OK, 1 row affected (0.42 sec)
+MariaDB [cs80]> select *from view;
++------+----------+-------+---------+
+| id     | name  | age  | marks |
++------+----------+-------+---------+
+| 101 | kalai      |   34 |   100   |
+| 102 | malai    |   24 |    50     |
+| 103 | guna     |   26 |    25     |
+| 104 | raja       |   30 |    70     |
++------+----------+-------+---------+
+4 rows in set (0.00 sec)
+MariaDB [cs80]> select name,age from view;
++---------+------+
+| name  | age |
++---------+------+
+| kalai    |   34 |
+| malai  |   24 |
+| guna   |   26 |
+| raja     |   30 |
++--------+-------+
+4 rows in set (0.00 sec)
+MariaDB [cs80]> select *from view; 							
++-----+---------+-------+---------+                                                                                                    
+| id   | name | age  | marks |                                                                                                                       +-----+---------+-------+---------+
+| 101 | kalai  |   34  |   100   |
+| 102 | malai |   24  |    50   |
+| 103 | guna  |   26  |    25   |
+| 104 | raja    |   30  |    70   |
++------+--------+-------+---------+
+4 rows in set (0.00 sec)
+MariaDB [cs80]> select name,age from view where age<28;
++---------+-------+
+| name  | age  |
++---------+-------+
+| malai   |   24 |
+| guna    |   26 |
++---------+-------+
+2 rows in set (0.00 sec)
+MariaDB [cs80]> select name,marks from view where marks<=50;
++---------+---------+
+| name  | marks |
++---------+---------+
+| malai   |    50   |
+| guna    |    25   | 									
++---------+---------+
+2 rows in set (0.00 sec)                                                                                                                                                                                                                                                       MariaDB [test]> select *from view where(age BETWEEN 24 AND 30)AND(marks BETWEEN 25 AND 100);
++-----+----------+-------+--------+                                                                                                              
+| id    | name  | age  | marks|
++-----+----------+-------+--------+
+| 102 | malai  |   24  |    50   |
+| 103 | guna   |   26  |    25   |
+| 104 | raja     |   30  |    70   |
++-----+---------+--------+--------+
+3 rows in set (0.00 sec)
+MariaDB [cs80]> delete from view where name like'guna';
+Query OK, 1 row affected (0.12 sec)
+MariaDB [cs80]> select *from view;
++-----+---------+------+---------+
+| id    | name | age | marks|
++-----+---------+------+---------+
+| 101 | kalai   |   34 |   100  |
+| 102 | malai |   |    50    |
+| 104 | raja    |   30 |    70    |
++-----+---------+------+---------+
+3 rows in set (0.00 sec)
+MariaDB [cs80]> delete from view; 							
+Query OK, 3 rows affected (0.28 sec)
+MariaDB [cs80]> DROP TABLE IF EXISTS view1;
+Query OK, 0 rows affected, 1 warning (0.13 sec)                                                                  
+MariaDB [cs80]> create table view1(name varchar(20), college varchar(20),phone int,primary key(phone));
+Query OK, 0 rows affected (1.98 sec)
+MariaDB [cs80]> DESCRIBE view1;
++---------+----------------+--------+-------+-----------+--------+
+| Field    |      Type        | Null  | Key | Default | Extra |
++---------+-----------------+-------+-------+-----------+--------+
+| name   | varchar(20)| YES   |          | NULL     |          |
+| college| varchar(20) | YES   |         | NULL     |          |
+| phone | int(11)          | NO   | PRI   | NULL     |          |
++---------+-----------------+-------+-------+-----------+--------+
+3 rows in set (0.01 sec)
+MariaDB [cs80]> insert into view1 values('prem','jeevan',987543210);
+Query OK, 1 row affected (0.36 sec)
+MariaDB [cs80]> insert into view1 values('thirudi','aadhavan',999005);
+Query OK, 1 row affected (0.11 sec)
+MariaDB [cs80]> insert into view1 values('vijay','meentchi',999505);
+Query OK, 1 row affected (0.43 sec)
+MariaDB [cs80]> select *from view1;
++----------+---------------+----------------+ 							
+| name    |    college   |   phone       |
++----------+---------------+----------------+
+| thirudi  | aadhavan |    999005     |
+| vijay      | meentchi  |    999505    |                                                                                      
+| prem     | jeevan      | 987543210 |
++----------+---------------+----------------+
+3 rows in set (0.00 sec)
+MariaDB [cs80]> DESCRIBE view;
++---------+------------------+-------+------+-----------+--------+
+| Field    |     Type          | Null | Key | Default| Extra |
++---------+------------------+-------+------+-----------+--------+
+| id          | int(11)          | NO   | PRI  | NULL     |           |
+| name   | varchar(10)  | YES  |         | NULL     |           |
+| age       | int(11)          | YES   |        | NULL     |           |
+| marks  | int(11)           | YES  |         | NULL     |           |
++----------+-----------------+-------+------+-----------+-------- +
+4 rows in set (1.73 sec)
+MariaDB [cs80]> create table view_details(id int,name text,PRIMARY KEY(id),FOREIGN KEY(id)REFERENCES view(id));
+Query OK, 0 rows affected (0.24 sec)
+MariaDB [cs80]> DESCRIBE view_details;
++---------+----------+-------+------+-----------+--------+
+| Field    | Type    | Null | Key | Default | Extra | 					
++---------+----------+-------+------+-----------+--------+
+| id         | int(11) | NO   | PRI  | NULL     |           |
+| name  | text      | YES  |         | NULL     |           |
++---------+----------+-------+------+-----------+--------+
+2 rows in set (0.01 sec)                                                                                                              
+

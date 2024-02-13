@@ -1,0 +1,72 @@
+C:\Users>cd..
+C:\>cd xampp
+C:\xampp>cd mysql
+C:\xampp\mysql>cd bin
+C:\xampp\mysql\bin>mysql -h localhost -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.1.28-MariaDB mariadb.org binary distribution
+Copyright (c) 2000, 2017, Oracle, MariaDB Corporation Ab and others.
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+MariaDB [(none)]> use cs80
+Database changed
+MariaDB [cs80]> create table class(name varchar(10),rollno int(10),dept varchar(10),age int(5),primary key(name));
+Query OK, 0 rows affected (0.81 sec)
+MariaDB [cs80]> insert into class values('sathish',100,'bcom',19);
+Query OK, 1 row affected (0.40 sec)
+MariaDB [cs80]> insert into class values('siva',101,'cs',17);
+Query OK, 1 row affected (0.41 sec) 							
+MariaDB [cs80]> insert into class values('veera',102,’tamil’,16);
+Query OK, 1 row affected (0.42 sec)                                                                                        
+MariaDB [cs80]> select *from class;                                                                                
++----------+---------+----------+------+
+| name   | rollno | dept    | age |
++----------+--------+-----------+------+
+| sathish |    100 | bcom   |   19 |
+|  siva     |    101 |cs           |   17  |
+| veera   |    102 | tamil     |   16 |
++----------+--------+-----------+------+
+3 rows in set (0.00 sec)
+MariaDB [cs80]> create table class1(name varchar(10),rollno int(10),dept varchar(10),age int(5),marks int(5),primary key(name));
+Query OK, 0 rows affected (0.56 sec)
+MariaDB [cs80]> insert into class1 values('a',100,'cs',19,490);
+Query OK, 1 row affected (0.42 sec)
+MariaDB [cs80]> insert into class1 values('b',101,'tamil',17,274);
+Query OK, 1 row affected (0.41 sec)
+MariaDB [cs80]> insert into class1 values('c',102,'english',16,536);
+Query OK, 1 row affected (0.42 sec)
+MariaDB [cs80]> select *from class1;
++---------+--------+-----------+-------+----------+
+| name | rollno | dept     | age  | marks | 						
++---------+--------+-----------+-------+---------+
+| a         |    100 | cs          |   19   |   490    |
+| b         |    101 | tamil    |   17   |   274     |                                                                           
+| c          |    102 | english |   16  |   536    |                                                                    
++---------+--------+-----------+-------+---------+
+3 rows in set (0.00 sec)
+MariaDB [cs80]> delete from class1 where age<17;
+Query OK, 1 row affected (0.47 sec)
+MariaDB [cs80]> select *from class1;
++--------+----------+--------+------+----------+
+| name | rollno | dept | age  | marks |
++--------+----------+-------+------+-----------+
+| a         |    100   | cs      |   19 |   490    |
+| b         |    101   | tamil|   17 |   274    |
++---------+----------+-------+------+----------+
+2 rows in set (0.00 sec)
+MariaDB [cs80]> update class1 set rollno=rollno+10;
+Query OK, 2 rows affected (1.88 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+MariaDB[cs80]>select *from class1;
++---------+--------+---------+------+----------+
+| name | rollno | dept  | age  | marks |
++---------+--------+---------+------+----------+ 						
+| a         |    110 | cs        |   19 |   490    |
+| b         |    111 | tamil  |   17 |   274    |
++---------+--------+---------+------+---------+
+2 rows in set (0.00 sec)                                                                                                                                                                                                                                                                                              
+
+
+
+
+

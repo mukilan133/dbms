@@ -1,0 +1,145 @@
+MariaDB [(none)]> use cs80
+Database changed
+MariaDB [cs80]> create table dee(id int,name varchar(20),primary key(id));
+Query OK, 0 rows affected (0.135 sec)
+
+MariaDB [cs80]>  insert into dee values(1,'naveen');
+Query OK, 1 row affected (0.163 sec)
+
+MariaDB [cs80]>  insert into dee values(2,'anu');
+Query OK, 1 row affected (0.052 sec)
+
+MariaDB [cs80]> insert into dee values(3,'aravind');
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [cs80]>  select *from dee;
++----+---------+
+| id | name    |
++----+---------+
+|  1 | naveen  |
+|  2 | anu     |
+|  3 | aravind |
++----+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]>  create table don(id int,name varchar(20),primary key(id));
+Query OK, 0 rows affected (0.259 sec)
+
+MariaDB [cs80]> insert into don values(2,'kavin');
+Query OK, 1 row affected (0.033 sec)
+
+MariaDB [cs80]> insert into don values(3,'vijay');
+Query OK, 1 row affected (0.036 sec)
+
+MariaDB [cs80]>  insert into don values(4,'aadhi');
+Query OK, 1 row affected (0.031 sec)
+
+MariaDB [cs80]>  select *from don;
++----+-------+
+| id | name  |
++----+-------+
+|  2 | kavin |
+|  3 | vijay |
+|  4 | aadhi |
++----+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> select *from dee INNER JOIN don;
++----+---------+----+-------+
+| id | name    | id | name  |
++----+---------+----+-------+
+|  1 | naveen  |  2 | kavin |
+|  2 | anu     |  2 | kavin |
+|  3 | aravind |  2 | kavin |
+|  1 | naveen  |  3 | vijay |
+|  2 | anu     |  3 | vijay |
+|  3 | aravind |  3 | vijay |
+|  1 | naveen  |  4 | aadhi |
+|  2 | anu     |  4 | aadhi |
+|  3 | aravind |  4 | aadhi |
++----+---------+----+-------+
+9 rows in set (0.004 sec)
+
+MariaDB [cs80]> select *from dee INNER JOIN don ON dee.id=don.id;
++----+---------+----+-------+
+| id | name    | id | name  |
++----+---------+----+-------+
+|  2 | anu     |  2 | kavin |
+|  3 | aravind |  3 | vijay |
++----+---------+----+-------+
+2 rows in set (0.046 sec)
+
+MariaDB [cs80]>  select *from dee INNER JOIN don USING(id);                          
++----+---------+-------+
+| id | name    | name  |
++----+---------+-------+
+|  2 | anu     | kavin |
+|  3 | aravind | vijay |
++----+---------+-------+
+2 rows in set (0.000 sec)
+
+MariaDB [cs80]>  select *from dee LEFT JOIN don ON dee.id=don.id;
++----+---------+------+-------+
+| id | name    | id   | name  |
++----+---------+------+-------+
+|  1 | naveen  | NULL | NULL  |
+|  2 | anu     |    2 | kavin |
+|  3 | aravind |    3 | vijay |
++----+---------+------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [cs80]> select *from dee LEFT JOIN don USING(id);
++----+---------+-------+
+| id | name    | name  |
++----+---------+-------+
+|  1 | naveen  | NULL  |
+|  2 | anu     | kavin |
+|  3 | aravind | vijay |
++----+---------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> select *from dee RIGHT JOIN don ON dee.id=don.id;
++------+---------+----+-------+
+| id   | name    | id | name  |
++------+---------+----+-------+
+|    2 | anu     |  2 | kavin |
+|    3 | aravind |  3 | vijay |
+| NULL | NULL    |  4 | aadhi |
++------+---------+----+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> select *from dee RIGHT JOIN don USING(id);
++----+-------+---------+
+| id | name  | name    |
++----+-------+---------+
+|  2 | kavin | anu     |
+|  3 | vijay | aravind |
+|  4 | aadhi | NULL    |
++----+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> select *from dee LEFT OUTER JOIN don ON dee.id=don.id;
++----+---------+------+-------+
+| id | name    | id   | name  |
++----+---------+------+-------+
+|  1 | naveen  | NULL | NULL  |
+|  2 | anu     |    2 | kavin |
+|  3 | aravind |    3 | vijay |
++----+---------+------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> select *from dee LEFT OUTER JOIN don USING(id);
++----+---------+-------+
+| id | name    | name  |
++----+---------+-------+
+|  1 | naveen  | NULL  |
+|  2 | anu     | kavin |
+|  3 | aravind | vijay |
++----+---------+-------+
+3 rows in set (0.000 sec)
+
+MariaDB [cs80]> drop table dee;
+Query OK, 0 rows affected (0.120 sec)
+
+MariaDB [cs80]> drop table don;
+Query OK, 0 rows affected (0.213 sec)
